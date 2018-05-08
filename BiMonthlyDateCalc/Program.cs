@@ -11,6 +11,7 @@ namespace BiMonthlyDateCalc
         static DateTime today = DateTime.Today;
         static DateTime payDay = new DateTime();
         static int daysTilPaid = 0;
+        
 
         static void Main(string[] args)
         {
@@ -18,7 +19,7 @@ namespace BiMonthlyDateCalc
             Console.WriteLine("Today is: " + today.Month + "/" + today.Day + "/" + today.Year);
             payDay = getPayday(today);
             Console.WriteLine("The end payday is: " + payDay.Month + "/" + payDay.Day + "/" + payDay.Year);
-            Console.WriteLine("You get paid in " + daysTilPaid + " Days");
+            Console.WriteLine("You get paid in " + daysTilPaid + "Days");
             Console.ReadKey();
         }
 
@@ -33,7 +34,7 @@ namespace BiMonthlyDateCalc
             }
             else
             {
-                daysTilPaid = 31 - currentDay.Day;
+                daysTilPaid = DateTime.DaysInMonth(today.Year, today.Month) - currentDay.Day;
                 currentDay.AddDays(daysTilPaid);
                 return currentDay;
             }
