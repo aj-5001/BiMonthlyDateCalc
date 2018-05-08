@@ -19,21 +19,21 @@ namespace BiMonthlyDateCalc
             Console.WriteLine("Today is: " + today.Month + "/" + today.Day + "/" + today.Year);
             payDay = getPayday(today);
             Console.WriteLine("The end payday is: " + payDay.Month + "/" + payDay.Day + "/" + payDay.Year);
-            Console.WriteLine("You get paid in " + daysTilPaid + "Days");
+            Console.WriteLine("You get paid in " + daysTilPaid + " Days");
+            Console.WriteLine("Hit any key to close..");
             Console.ReadKey();
         }
 
         static public DateTime getPayday(DateTime currentDay)
         {
-            //do something to currentday
-            if (currentDay.Day < 15)
+            if (currentDay.Day < 15) // checks the 15th has not passed
             {
-                daysTilPaid = 15 - currentDay.Day;
-                currentDay = currentDay.AddDays(daysTilPaid);
+                daysTilPaid = 15 - currentDay.Day;  // sets remainder days until payday
+                currentDay = currentDay.AddDays(daysTilPaid); // sets value^
                 return currentDay;
             }
             else
-            {
+            {   // same thing for dates after the 15th, uses DaysInMonth for difference in months days
                 daysTilPaid = DateTime.DaysInMonth(today.Year, today.Month) - currentDay.Day;
                 currentDay.AddDays(daysTilPaid);
                 return currentDay;
