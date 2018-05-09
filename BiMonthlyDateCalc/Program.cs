@@ -12,6 +12,7 @@ namespace BiMonthlyDateCalc
         static DateTime payDay = new DateTime();
         static int daysTilPaid = 0;
         
+        
 
         static void Main(string[] args)
         {
@@ -22,15 +23,31 @@ namespace BiMonthlyDateCalc
             Console.WriteLine("You get paid in " + daysTilPaid + " Days");
             Console.WriteLine("Hit any key to close..");
             Console.ReadKey();
+            
         }
 
         static public DateTime getPayday(DateTime currentDay)
         {
             if (currentDay.Day < 15) // checks the 15th has not passed
-            {
-                daysTilPaid = 15 - currentDay.Day;  // sets remainder days until payday
-                currentDay = currentDay.AddDays(daysTilPaid); // sets value^
-                return currentDay;
+            { // needs to check for if the 15 falls on a saturday or not
+                if (currentDay.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    daysTilPaid = 14 - currentDay.Day;  // sets remainder days until payday
+                    currentDay = currentDay.AddDays(daysTilPaid); // sets value^
+                    return currentDay;
+                }
+                if (currentDay.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    daysTilPaid = 13 - currentDay.Day;  // sets remainder days until payday
+                    currentDay = currentDay.AddDays(daysTilPaid); // sets value^
+                    return currentDay;
+                }
+                else // runs when day isn't on a Saturday or Sunday
+                {
+                    daysTilPaid = 15 - currentDay.Day;  // sets remainder days until payday
+                    currentDay = currentDay.AddDays(daysTilPaid); // sets value^
+                    return currentDay;
+                }
             }
             else
             {   // same thing for dates after the 15th, uses DaysInMonth for difference in months days
