@@ -50,7 +50,21 @@ namespace BiMonthlyDateCalc
                 }
             }
             else
-            {   // same thing for dates after the 15th, uses DaysInMonth for difference in months days
+            {   
+                if (currentDay.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    daysTilPaid = DateTime.DaysInMonth(today.Year, today.Month) - (currentDay.Day + 1);
+                    currentDay.AddDays(daysTilPaid);
+                    return currentDay;
+                }
+                if (currentDay.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    daysTilPaid = DateTime.DaysInMonth(today.Year, today.Month) - (currentDay.Day + 2);
+                    currentDay.AddDays(daysTilPaid);
+                    return currentDay;
+
+                }
+                // same thing for dates after the 15th, uses DaysInMonth for difference in months days
                 daysTilPaid = DateTime.DaysInMonth(today.Year, today.Month) - currentDay.Day;
                 currentDay.AddDays(daysTilPaid);
                 return currentDay;
