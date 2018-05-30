@@ -25,7 +25,7 @@ namespace BiMonthlyDateCalc
             }
             else
             {
-                Console.WriteLine("The end payday is: " + payDay.Month + "/" + payDay.Day + "/" + payDay.Year);
+                Console.WriteLine("The end payday is: " + payDay.Month + "/" + payDay.Day + "/" + payDay.Year + " " + payDay.DayOfWeek);
             }
             Console.WriteLine("You get paid in " + daysTilPaid + " Days");
             Console.WriteLine("Hit any key to close..");
@@ -74,13 +74,13 @@ namespace BiMonthlyDateCalc
                 if (newPayDate.DayOfWeek == DayOfWeek.Saturday)
                 {
                     daysTilPaid = DateTime.DaysInMonth(currentDay.Year, currentDay.Month) - (currentDay.Day - 1);
-                    currentDay.AddDays(daysTilPaid);
+                    currentDay = currentDay.AddDays(daysTilPaid);
                     return currentDay; // resets the payday based on whether it's a saturday
                 }
                 if (newPayDate.DayOfWeek == DayOfWeek.Sunday)
                 {
                     daysTilPaid = DateTime.DaysInMonth(currentDay.Year, currentDay.Month) - (currentDay.Day - 2);
-                    currentDay.AddDays(daysTilPaid);
+                    currentDay = currentDay.AddDays(daysTilPaid);
                     return currentDay;
                 }
                 return newPayDate;
