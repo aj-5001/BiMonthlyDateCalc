@@ -46,7 +46,7 @@ namespace BiMonthlyDateCalc
                 {
                     daysTilPaid = 15 - currentDay.Day;
                     var newPaydate = currentDay;
-                    newPaydate.AddDays(daysTilPaid);
+                    newPaydate = newPaydate.AddDays(daysTilPaid);
                     if (newPaydate.DayOfWeek == DayOfWeek.Saturday) // double checking payday is correct
                     {
                         daysTilPaid = 14 - currentDay.Day;  // sets remainder days until payday
@@ -69,7 +69,7 @@ namespace BiMonthlyDateCalc
             {
                 daysTilPaid = DateTime.DaysInMonth(currentDay.Year, currentDay.Month) - currentDay.Day;
                 var newPayDate = currentDay;
-                newPayDate.AddDays(daysTilPaid);
+                newPayDate = newPayDate.AddDays(daysTilPaid);
                 // set the pay date to then be checked below
                 if (newPayDate.DayOfWeek == DayOfWeek.Saturday)
                 {
