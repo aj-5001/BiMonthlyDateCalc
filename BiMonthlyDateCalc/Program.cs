@@ -47,16 +47,20 @@ namespace BiMonthlyDateCalc
                     daysTilPaid = 15 - currentDay.Day;
                     var newPaydate = currentDay;
                     newPaydate = newPaydate.AddDays(daysTilPaid);
+                    Console.WriteLine("New Pay date Test: " + newPaydate.Month + "/" + newPaydate.Day + "/" + newPaydate.Year);
                     if (newPaydate.DayOfWeek == DayOfWeek.Saturday) // double checking payday is correct
                     {
                         daysTilPaid = 14 - currentDay.Day;  // sets remainder days until payday
                         currentDay = currentDay.AddDays(daysTilPaid); // sets value^
+                        Console.WriteLine("New Pay date Test, before 15th, saturday: " + newPaydate.Month + "/" + newPaydate.Day + "/" + newPaydate.Year);
                         return currentDay;
                     }
                     if (newPaydate.DayOfWeek == DayOfWeek.Sunday)
                     {
                         daysTilPaid = 13 - currentDay.Day;  // sets remainder days until payday
                         currentDay = currentDay.AddDays(daysTilPaid); // sets value^
+                        Console.WriteLine("New Pay date Test, before 15th, sunday: " + newPaydate.Month + "/" + newPaydate.Day + "/" + newPaydate.Year);
+                        Console.WriteLine("Currentday (returned value): " + currentDay.Month + "/" + currentDay.Day + "/" + currentDay.Year);
                         return currentDay;
                     }
                     else
@@ -75,12 +79,14 @@ namespace BiMonthlyDateCalc
                 {
                     daysTilPaid = DateTime.DaysInMonth(currentDay.Year, currentDay.Month) - (currentDay.Day - 1);
                     currentDay = currentDay.AddDays(daysTilPaid);
+                    Console.WriteLine("New Pay date Test, after 15th, Saturday: " + newPayDate.Month + "/" + newPayDate.Day + "/" + newPayDate.Year);
                     return currentDay; // resets the payday based on whether it's a saturday
                 }
                 if (newPayDate.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    daysTilPaid = DateTime.DaysInMonth(currentDay.Year, currentDay.Month) - (currentDay.Day - 2);
+                    daysTilPaid = DateTime.DaysInMonth(currentDay.Year, currentDay.Month) - (currentDay.Day - 1);
                     currentDay = currentDay.AddDays(daysTilPaid);
+                    Console.WriteLine("New Pay date Test, after 15th, sunday: " + newPayDate.Month + "/" + newPayDate.Day + "/" + newPayDate.Year);
                     return currentDay;
                 }
                 return newPayDate;
